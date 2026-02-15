@@ -1,0 +1,28 @@
+[project]
+name = "researchlab"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "alirezanobakht13", email = "a.nobakht13@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "coolname>=3.0.0",
+    "gitpython>=3.1.46",
+    "mlflow>=3.9.0",
+    "pyyaml>=6.0.3",
+    "typer>=0.23.1",
+]
+
+[project.scripts]
+rlab = "researchlab.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.9.22,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]

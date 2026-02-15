@@ -1,0 +1,88 @@
+# ruff.toml – Modern late-2025 config for Python ≥3.12 projects
+# • Matches Black + Ruff formatter perfectly
+# • Includes the rules that appear in ~90–95 % of popular repos
+# • Never auto-removes unused imports/variables on save (F401/F841 unfixable)
+# • Docstrings are completely optional → no warnings if you skip them on simple functions/classes
+# • But if you DO write a docstring, it MUST follow Google style (enforced (sections, capitalization, imperative mood, period at end of summary, etc.)
+
+target-version = "py312"   # your project supports ≥3.12
+
+line-length = 100
+indent-width = 4
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[lint]
+select = [
+    "E4", "E7", "E9",  # pycodestyle errors
+    "F",                # pyflakes → we keep F401/F841 but make them unfixable
+    "UP",              # pyupgrade
+    "B",               # bugbear – in almost every config
+    "I",               # isort
+    "C4",              # flake8-comprehensions
+    "ISC",             # implicit string concatenation
+    "ICN",             # import conventions
+    "RET",             # flake8-return
+    "SIM",             # flake8-simplify
+    "TID",             # flake8-tidy-imports
+    "TCH",             # type-checking imports
+    "PTH",              # pathlib
+    "FA",              # future-annotations
+    "PT",              # pytest style
+    "PIE",             # misc good practices
+    "D",               # pydocstyle with Google convention (docstrings optional)
+]
+
+ignore = [
+    "E501",    # line too long → formatter handles it
+    "ISC001",  # conflicts with formatter
+    "D1",      # ←←← THIS MAKES ALL "missing docstring" rules ignored (D100–D199)
+]
+
+# Crucial for your editor "format on save" workflow:
+# You still get warnings for unused import/variable warnings,
+# but Ruff will never delete them automatically → flow stays uninterrupted
+unfixable = [
+    "F401",  # imported but unused
+    "F841",  # local variable assigned but never used
+]
+
+fixable = ["ALL"]
+
+[lint.pydocstyle]
+convention = "google"   # Enforces full Google docstring style when a docstring exists
+                         # (Ruff automatically ignores rules incompatible with Google style)
