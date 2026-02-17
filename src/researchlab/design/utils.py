@@ -22,9 +22,11 @@ def flatten_pytree(tree: Any, prefix: str = "", separator: str = ".") -> dict[st
         A dictionary mapping flattened string keys to the leaf values of the tree.
 
     Example:
-        >>> tree = {"x": 10, "sub": {"y": 20}}
-        >>> flatten_pytree(tree)
-        {'x': 10, 'sub.y': 20}
+        ```python
+        tree = {"x": 10, "sub": {"y": 20}}
+        print(flatten_pytree(tree))
+        # {'x': 10, 'sub.y': 20}
+        ```
     """
     flat_dict = {}
 
@@ -73,10 +75,12 @@ def unflatten_pytree[T](flat_dict: dict[str, Any], structure: T, separator: str 
         updated from `flat_dict`.
 
     Example:
-        >>> flat = {"x": 100, "sub.y": 200}
-        >>> structure = {"x": 0, "sub": {"y": 0}}
-        >>> unflatten_pytree(flat, structure)
-        {'x': 100, 'sub': {'y': 200}}
+        ```python
+        flat = {'x': 100, 'sub.y': 200}
+        structure = {"x": 0, "sub": {"y": 0}}
+        print(unflatten_pytree(flat, structure))
+        # {'x': 100, 'sub': {'y': 200}}
+        ```
     """
     # We traverse the structure and look up values in flat_dict using the generated path key.
 
@@ -118,11 +122,13 @@ def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> di
         A flattened dictionary representation of the configuration.
 
     Example:
-        >>> class MyConfig(Config):
-        ...     nested: dict = {"a": 1}
-        >>> config = MyConfig()
-        >>> flatten_config(config)
-        {'nested.a': 1}
+        ```python
+        class MyConfig(Config):
+            nested: dict = {"a": 1}
+        config = MyConfig()
+        print(flatten_config(config))
+        # {'nested.a': 1}
+        ```
     """
     # Use Pydantic's model_dump to get nested dict
     d = config.model_dump()
@@ -142,9 +148,7 @@ def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> di
     return flat
 
 
-def unflatten_config[C: Config](
-    flat_dict: dict[str, Any], config_cls: type[C], separator: str = "."
-) -> C:
+def unflatten_config[C: Config](flat_dict: dict[str, Any], config_cls: type[C], separator: str = ".") -> C:
     """Reconstructs a Config object from a flattened dictionary.
 
     This function unflattens a dictionary into a nested structure and then
@@ -163,9 +167,11 @@ def unflatten_config[C: Config](
         ValidationError: If the reconstructed data fails Pydantic validation.
 
     Example:
-        >>> flat = {"nested.a": 1}
-        >>> unflatten_config(flat, MyConfig)
-        MyConfig(nested={'a': 1})
+        ```python
+        flat = {'nested.a': 1}
+        print(unflatten_config(flat, MyConfig))
+        # MyConfig(nested={'a': 1})
+        ```
     """
     # Unflatten dict
     nested = {}

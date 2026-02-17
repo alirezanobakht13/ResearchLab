@@ -13,15 +13,17 @@ class Loop[S: State, C: Config]:
     and periodic tasks.
 
     Example:
-        >>> # Assuming components are defined
-        >>> loop = Loop(
-        ...     config=config,
-        ...     initial_state=state,
-        ...     step_fn=step_fn,
-        ...     data_provider=provider,
-        ...     telemetry=telemetry,
-        ... )
-        >>> loop.run(num_steps=100)
+        ```python
+        # Assuming components are defined
+        loop = Loop(
+            config=config,
+            initial_state=state,
+            step_fn=step_fn,
+            data_provider=provider,
+            telemetry=telemetry
+        )
+        loop.run(num_steps=100)
+        ```
     """
 
     def __init__(
@@ -34,17 +36,16 @@ class Loop[S: State, C: Config]:
         persister: Persister[S, C] | None = None,
         visualizer: Visualizer[S] | None = None,
     ):
-        """Initializes the training loop with components.
+        """Initializes the loop.
 
         Args:
-            config: Immutable hyperparameters configuration.
+            config: Immutable hyperparameters.
             initial_state: Initial simulation state.
-            step_fn: A pure kernel function (e.g., JIT-compiled update step)
-                that takes `(state, config, batch)` and returns `(new_state, metrics)`.
-            data_provider: Source of data batches.
-            telemetry: Optional logger for metrics and parameters.
-            persister: Optional checkpointer for saving/loading state.
-            visualizer: Optional renderer for visualization.
+            step_fn: A pure kernel function that takes (state, config, batch) and returns (new_state, metrics).
+            data_provider: Source of data.
+            telemetry: Optional logger.
+            persister: Optional checkpointer.
+            visualizer: Optional renderer.
         """
         self.config = config
         self.state = initial_state
@@ -56,26 +57,15 @@ class Loop[S: State, C: Config]:
         self.step = 0
 
     def run(self, num_steps: int):
-        """Runs the loop for a specified number of steps.
-
-        This method executes the main loop:
-        1. Fetch data batch.
-        2. Execute step function (update state).
-        3. Log metrics (if telemetry is enabled).
-        4. (Optional) Save checkpoint.
-        5. (Optional) Visualize state.
-
-        Args:
-            num_steps: The number of steps to execute.
-        """
+        """Run the loop for a specified number of steps."""
         for _ in range(num_steps):
             self.step += 1
-
+            
             # 1. Get Data
             try:
                 batch = self.data_provider.get_batch(self.state)
             except NotImplementedError:
-                batch = next(self.data_provider)  # Fallback to iterator protocol if implemented
+                batch = next(self.data_provider) # Fallback to iterator protocol if implemented
             except StopIteration:
                 break
 
@@ -95,22 +85,10 @@ class Loop[S: State, C: Config]:
                 # self.visualizer.render(self.state)
                 pass
 
-    def save_checkpoint(
-        self, path: Any
-    ):  # using Any for path to avoid circular imports if Path is needed
-        """Manually triggers a checkpoint save.
-
-        Args:
-            path: The path to save the checkpoint to.
-        """
+    def save_checkpoint(self, path: Any): # using Any for path to avoid circular imports if Path is needed
         if self.persister:
             self.persister.save(self.state, self.config, self.step, path)
 
     def load_checkpoint(self, path: Any):
-        """Manually loads a checkpoint.
-
-        Args:
-            path: The path to load the checkpoint from.
-        """
         if self.persister:
             self.state, self.config, self.step = self.persister.load(path, self.state, self.config)

@@ -9,10 +9,10 @@ from researchlab.tracking.utils import log_flattened_params
 
 from .core import Config, State
 
+
 # -----------------------------------------------------------------------------
 # Data Provider
 # -----------------------------------------------------------------------------
-
 
 class DataProvider[S: State](ABC):
     """Abstract base class for providing data batches to the training loop.
@@ -53,7 +53,6 @@ class DataProvider[S: State](ABC):
 # Telemetry
 # -----------------------------------------------------------------------------
 
-
 class Telemetry[S: State, C: Config](ABC):
     """Abstract base class for logging metrics and parameters.
 
@@ -91,13 +90,16 @@ class MLFlowTelemetry[S: State, C: Config](Telemetry[S, C]):
     scalar arrays to Python floats to ensure compatibility with MLflow.
 
     Example:
-        >>> # Inside an active MLflow run
-        >>> telemetry = MLFlowTelemetry()
-        >>> telemetry.log_metrics({"loss": 0.5}, step=10)
+        ```python
+        # Inside an active MLflow run
+        telemetry = MLFlowTelemetry()
+        telemetry.log_metrics({"loss": 0.5}, step=10)
+        ```
     """
 
     def __init__(self):
         """Initializes the MLFlowTelemetry instance."""
+        pass
 
     def log_metrics(self, metrics: dict[str, float], step: int) -> None:
         """Logs scalar metrics to MLflow.
@@ -136,7 +138,6 @@ class MLFlowTelemetry[S: State, C: Config](Telemetry[S, C]):
 # Persister
 # -----------------------------------------------------------------------------
 
-
 class Persister[S: State, C: Config](ABC):
     """Abstract base class for saving and loading checkpoints.
 
@@ -157,7 +158,9 @@ class Persister[S: State, C: Config](ABC):
         ...
 
     @abstractmethod
-    def load(self, path: Path, state_structure: S, config_structure: C) -> tuple[S, C, int]:
+    def load(
+        self, path: Path, state_structure: S, config_structure: C
+    ) -> tuple[S, C, int]:
         """Loads state and config from a checkpoint.
 
         Args:
@@ -178,8 +181,14 @@ class EquinoxPersister[S: State, C: Config](Persister[S, C]):
     It assumes that the `Config` object is handled separately or reconstructible, as Equinox
     serialization primarily handles array data (leaves).
 
-    Attributes:
-        None
+    Example:
+        ```python
+        from pathlib import Path
+
+        persister = EquinoxPersister()
+        # Saves only the state (config is ignored)
+        persister.save(state, config, step=100, path=Path("ckpt.eqx"))
+        ```
     """
 
     def save(self, state: S, config: C, step: int, path: Path) -> None:
@@ -201,7 +210,9 @@ class EquinoxPersister[S: State, C: Config](Persister[S, C]):
         path.parent.mkdir(parents=True, exist_ok=True)
         eqx.tree_serialise_leaves(path, state)
 
-    def load(self, path: Path, state_structure: S, config_structure: C) -> tuple[S, C, int]:
+    def load(
+        self, path: Path, state_structure: S, config_structure: C
+    ) -> tuple[S, C, int]:
         """Loads state from a .eqx file.
 
         Note: This implementation currently only restores State.
@@ -223,7 +234,6 @@ class EquinoxPersister[S: State, C: Config](Persister[S, C]):
 # -----------------------------------------------------------------------------
 # Visualizer
 # -----------------------------------------------------------------------------
-
 
 class Visualizer[S: State](ABC):
     """Abstract base class for rendering the simulation state.

@@ -17,13 +17,15 @@ class Config(BaseModel):
     to ensure reproducibility.
 
     Example:
-        >>> class TrainingConfig(Config):
-        ...     learning_rate: float = 1e-3
-        ...     batch_size: int = 32
-        >>>
-        >>> config = TrainingConfig(learning_rate=0.01)
-        >>> config.model_dump()
-        {'learning_rate': 0.01, 'batch_size': 32}
+        ```python
+        class TrainingConfig(Config):
+            learning_rate: float = 1e-3
+            batch_size: int = 32
+
+        config = TrainingConfig(learning_rate=0.01)
+        print(config.model_dump())
+        # {'learning_rate': 0.01, 'batch_size': 32}
+        ```
     """
 
     model_config = ConfigDict(frozen=True)
@@ -37,14 +39,16 @@ class State(eqx.Module):
     like `jax.jit`, `jax.grad`, and `jax.vmap`.
 
     Example:
-        >>> import jax.numpy as jnp
-        >>> import equinox as eqx
-        >>>
-        >>> class EnvState(State):
-        ...     position: jnp.ndarray
-        ...     velocity: jnp.ndarray
-        >>>
-        >>> state = EnvState(position=jnp.zeros(2), velocity=jnp.zeros(2))
+        ```python
+        import jax.numpy as jnp
+        import equinox as eqx
+
+        class EnvState(State):
+            position: jnp.ndarray
+            velocity: jnp.ndarray
+
+        state = EnvState(position=jnp.zeros(2), velocity=jnp.zeros(2))
+        ```
     """
 
 
@@ -115,24 +119,26 @@ class Selector[S: State, C: Config]:
             to the kernel.
 
     Example:
-        >>> class MyState(State):
-        ...     val: int
-        >>> class MyConfig(Config):
-        ...     factor: int
-        >>>
-        >>> # Define how to extract arguments
-        >>> def my_extractor(state, config):
-        ...     return (state.val, config.factor), {}
-        >>>
-        >>> # Wrap the kernel
-        >>> @Selector(my_extractor)
-        ... def compute(val, factor):
-        ...     return val * factor
-        >>>
-        >>> state = MyState(val=10)
-        >>> config = MyConfig(factor=2)
-        >>> compute(state, config)
-        20
+        ```python
+        class MyState(State):
+            val: int
+        class MyConfig(Config):
+            factor: int
+
+        # Define how to extract arguments
+        def my_extractor(state, config):
+            return (state.val, config.factor), {}
+
+        # Wrap the kernel
+        @Selector(my_extractor)
+        def compute(val, factor):
+            return val * factor
+
+        state = MyState(val=10)
+        config = MyConfig(factor=2)
+        print(compute(state, config))
+        # 20
+        ```
     """
 
     def __init__(
@@ -167,19 +173,21 @@ class FieldSelector[S: State, C: Config](Selector[S, C]):
             and values are dot-notation strings starting with 'state.' or 'config.'.
 
     Example:
-        >>> class MyState(State):
-        ...     val: int
-        >>> class MyConfig(Config):
-        ...     factor: int
-        >>>
-        >>> @FieldSelector(a="state.val", b="config.factor")
-        ... def multiply(a, b):
-        ...     return a * b
-        >>>
-        >>> state = MyState(val=5)
-        >>> config = MyConfig(factor=3)
-        >>> multiply(state, config)
-        15
+        ```python
+        class MyState(State):
+            val: int
+        class MyConfig(Config):
+            factor: int
+
+        @FieldSelector(a="state.val", b="config.factor")
+        def multiply(a, b):
+            return a * b
+
+        state = MyState(val=5)
+        config = MyConfig(factor=3)
+        print(multiply(state, config))
+        # 15
+        ```
     """
 
     def __init__(self, **mappings: str):
