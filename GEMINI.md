@@ -4,48 +4,47 @@ This document provides essential context and instructions for working on the `re
 
 ## Project Overview
 
-`researchlab` (CLI: `rlab`) is a tool designed to manage "dirty" research runs. It bridges the gap between experimental results in MLflow and the exact code state that produced them, even if the code was not committed at the time of the run.
-
-### Core Workflow
-1.  **Capture:** The `ExperimentTracker` context manager captures the current Git HEAD SHA and a full patch (staged + unstaged + untracked changes) and logs them to MLflow.
-2.  **Restore:** The `rlab restore` command creates a new git branch from the recorded base commit and applies the saved patch.
-3.  **Compare:** The `rlab diff` command performs a three-way diff between two MLflow runs by reconstructing their code states in temporary directories.
+`researchlab` (CLI: `rlab`) is a comprehensive tool for ML research. It consists of two main modules:
+1.  `tracking`: Manages "dirty" research runs by capturing Git state (commits + patches).
+2.  `design`: Provides patterns and abstractions (State, Config, Loop) for structured, functional-style research code using JAX/Equinox.
 
 ## Technical Stack
-- **Language:** Python 3.12+
-- **Dependency Management:** [uv](https://github.com/astral-sh/uv)
-- **Experiment Tracking:** [MLflow](https://mlflow.org/)
-- **Git Integration:** [GitPython](https://gitpython.readthedocs.io/)
-- **CLI Framework:** [Typer](https://typer.tiangolo.com/)
-- **Testing:** [pytest](https://docs.pytest.org/)
+-   **Language:** Python 3.12+ (Uses new type parameter syntax `class Foo[T]:`).
+-   **Dependency Management:** [uv](https://github.com/astral-sh/uv)
+-   **Experiment Tracking:** [MLflow](https://mlflow.org/)
+-   **Git Integration:** [GitPython](https://gitpython.readthedocs.io/)
+-   **CLI Framework:** [Typer](https://typer.tiangolo.com/)
+-   **Core ML Framework (Design module):** [JAX](https://github.com/google/jax), [Equinox](https://github.com/patrick-kidger/equinox)
+-   **Configuration:** [Pydantic](https://docs.pydantic.dev/)
+-   **Testing:** [pytest](https://docs.pytest.org/)
 
 ## Key Files and Directory Structure
-- `src/researchlab/`
-    - `tracker.py`: Contains the `ExperimentTracker` context manager used in training scripts.
-    - `cli.py`: Implements the `rlab` command-line interface.
-    - `utils.py`: Utility functions for Git state capture (`get_git_state`) and MLflow run lookup.
-- `tests/`
-    - `conftest.py`: Shared fixtures, including a mocked git repository and local MLflow tracking.
-    - `test_tracker.py` & `test_cli.py`: Comprehensive tests for core functionality.
+-   `src/researchlab/`
+    -   `tracking/`: **Module 1: Dirty Run Tracking**
+        -   `tracker.py`: `ExperimentTracker` context manager.
+        -   `cli.py`: `rlab` CLI commands.
+        -   `utils.py`: Git capture and MLflow helpers.
+    -   `design/`: **Module 2: Research Design Patterns**
+        -   `core.py`: Core abstractions (`State`, `Config`, `Selector`).
+        -   `infra.py`: Infrastructure interfaces (`Telemetry`, `Persister`, `DataProvider`).
+        -   `orchestrator.py`: The training `Loop`.
+        -   `utils.py`: Flattening/Unflattening utilities for PyTrees and Configs.
+-   `tests/`
+    -   `tracking/`: Tests for the tracking module (`test_tracker.py`, `test_cli.py`).
+    -   `design/`: Tests for the design module (`test_core.py`, `test_infra.py`, `test_utils.py`).
+    -   `conftest.py`: Shared fixtures.
 
 ## Development Commands
 
 ### Environment Setup
 ```bash
-# Install dependencies
-uv sync
+# Install all dependencies (including design extras)
+uv sync --all-extras
 ```
 
 ### Running the CLI
 ```bash
-# List experiment branches
 uv run rlab list
-
-# Restore a run
-uv run rlab restore <run_id>
-
-# Diff two runs
-uv run rlab diff <run_id_1> <run_id_2>
 ```
 
 ### Testing
@@ -53,12 +52,12 @@ uv run rlab diff <run_id_1> <run_id_2>
 # Run all tests
 uv run pytest
 
-# Run with coverage (if configured)
-uv run pytest --cov=researchlab
+# Run specific module tests
+uv run pytest tests/design/
 ```
 
 ### Linting and Formatting
-The project uses `ruff` for linting and formatting (see `ruff.toml`).
+The project uses `ruff` for linting and formatting.
 ```bash
 uv run ruff check .
 uv run ruff format .
@@ -66,18 +65,18 @@ uv run ruff format .
 
 ## Implementation Details & Conventions
 
-### MLflow Integration
-- **Tags:** 
-    - `rlab.base_commit`: The Git SHA of HEAD at run time.
-    - `rlab.run_id`: A human-readable ID (e.g., `2026-02-15_radiant-octopus`).
-- **Artifacts:**
-    - `run.patch`: A git-compatible patch file containing all local changes.
+### Tracking Module
+-   **Tags:** `rlab.base_commit` (Git SHA), `rlab.run_id` (Readable ID).
+-   **Artifacts:** `run.patch` (Git patch).
+-   **Git Strategy:** Uses `git add -N` for untracked files.
 
-### Git Strategy
-- **Intent-to-Add:** To include untracked files in the patch, `rlab` temporarily marks them with `git add -N` before generating the diff, then resets the index.
-- **Branch Naming:** Restored runs are placed in branches named `experiment/<run_id>`.
+### Design Module
+-   **State:** Inherits from `equinox.Module`. Must be a valid JAX PyTree.
+-   **Config:** Inherits from `pydantic.BaseModel` (frozen).
+-   **Selectors:** Use `FieldSelector` to map `state.x` -> `kernel_arg` via dot notation.
+-   **Serialization:** `EquinoxPersister` uses `equinox.tree_serialise_leaves` (Safetensors) for State. Config is handled separately or via Pydantic dump.
 
 ### Code Style
-- Use type hints for all function signatures.
-- Prefer `pathlib.Path` for file system operations.
-- Follow the formatting rules defined in `ruff.toml`.
+-   Use Python 3.12+ syntax (e.g., `class Foo[T]:`).
+-   Google-style docstrings for public APIs.
+-   Strict typing using standard library and `jaxtyping` where applicable.
