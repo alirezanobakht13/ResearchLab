@@ -52,9 +52,7 @@ def test_equinox_persister_nested_state(tmp_path):
 
     # Create nested state
     sub = SubState(val=jnp.array([1, 2, 3]))
-    state = ComplexState(
-        sub=sub, d={"a": jnp.array([4, 5])}, t=(jnp.array([6]), "static_string")
-    )
+    state = ComplexState(sub=sub, d={"a": jnp.array([4, 5])}, t=(jnp.array([6]), "static_string"))
 
     config = MyConfig(name="nested")
     save_path = tmp_path / "nested.eqx"

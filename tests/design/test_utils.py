@@ -20,9 +20,7 @@ def test_flatten_unflatten_state():
         t: tuple
 
     sub = SubState(val=jnp.array([1, 2]))
-    state = ComplexState(
-        x=10, sub=sub, d={"a": 3, "b": jnp.array([4])}, t=(5, jnp.array([6]))
-    )
+    state = ComplexState(x=10, sub=sub, d={"a": 3, "b": jnp.array([4])}, t=(5, jnp.array([6])))
 
     # Flatten
     flat = flatten_pytree(state)

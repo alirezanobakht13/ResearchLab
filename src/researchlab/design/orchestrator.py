@@ -5,7 +5,24 @@ from .infra import DataProvider, Persister, Telemetry, Visualizer
 
 
 class Loop[S: State, C: Config]:
-    """A generic training loop implementation that ties Core and Infrastructure together."""
+    """A generic training/simulation loop orchestrator.
+
+    The `Loop` class coordinates the interaction between the core components
+    (State, Config, Kernel) and the infrastructure components (Data, Telemetry,
+    Persistence, Visualization). It manages the execution flow, step counting,
+    and periodic tasks.
+
+    Example:
+        >>> # Assuming components are defined
+        >>> loop = Loop(
+        ...     config=config,
+        ...     initial_state=state,
+        ...     step_fn=step_fn,
+        ...     data_provider=provider,
+        ...     telemetry=telemetry,
+        ... )
+        >>> loop.run(num_steps=100)
+    """
 
     def __init__(
         self,
@@ -17,16 +34,17 @@ class Loop[S: State, C: Config]:
         persister: Persister[S, C] | None = None,
         visualizer: Visualizer[S] | None = None,
     ):
-        """Initializes the loop.
+        """Initializes the training loop with components.
 
         Args:
-            config: Immutable hyperparameters.
+            config: Immutable hyperparameters configuration.
             initial_state: Initial simulation state.
-            step_fn: A pure kernel function that takes (state, config, batch) and returns (new_state, metrics).
-            data_provider: Source of data.
-            telemetry: Optional logger.
-            persister: Optional checkpointer.
-            visualizer: Optional renderer.
+            step_fn: A pure kernel function (e.g., JIT-compiled update step)
+                that takes `(state, config, batch)` and returns `(new_state, metrics)`.
+            data_provider: Source of data batches.
+            telemetry: Optional logger for metrics and parameters.
+            persister: Optional checkpointer for saving/loading state.
+            visualizer: Optional renderer for visualization.
         """
         self.config = config
         self.state = initial_state
@@ -38,15 +56,26 @@ class Loop[S: State, C: Config]:
         self.step = 0
 
     def run(self, num_steps: int):
-        """Run the loop for a specified number of steps."""
+        """Runs the loop for a specified number of steps.
+
+        This method executes the main loop:
+        1. Fetch data batch.
+        2. Execute step function (update state).
+        3. Log metrics (if telemetry is enabled).
+        4. (Optional) Save checkpoint.
+        5. (Optional) Visualize state.
+
+        Args:
+            num_steps: The number of steps to execute.
+        """
         for _ in range(num_steps):
             self.step += 1
-            
+
             # 1. Get Data
             try:
                 batch = self.data_provider.get_batch(self.state)
             except NotImplementedError:
-                batch = next(self.data_provider) # Fallback to iterator protocol if implemented
+                batch = next(self.data_provider)  # Fallback to iterator protocol if implemented
             except StopIteration:
                 break
 
@@ -66,10 +95,22 @@ class Loop[S: State, C: Config]:
                 # self.visualizer.render(self.state)
                 pass
 
-    def save_checkpoint(self, path: Any): # using Any for path to avoid circular imports if Path is needed
+    def save_checkpoint(
+        self, path: Any
+    ):  # using Any for path to avoid circular imports if Path is needed
+        """Manually triggers a checkpoint save.
+
+        Args:
+            path: The path to save the checkpoint to.
+        """
         if self.persister:
             self.persister.save(self.state, self.config, self.step, path)
 
     def load_checkpoint(self, path: Any):
+        """Manually loads a checkpoint.
+
+        Args:
+            path: The path to load the checkpoint from.
+        """
         if self.persister:
             self.state, self.config, self.step = self.persister.load(path, self.state, self.config)

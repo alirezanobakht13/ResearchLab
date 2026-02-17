@@ -6,15 +6,25 @@ from .core import Config
 
 
 def flatten_pytree(tree: Any, prefix: str = "", separator: str = ".") -> dict[str, Any]:
-    """Flattens a PyTree (like State) into a dictionary with dot-notation keys.
+    """Flattens a JAX PyTree into a dictionary with dot-notation keys.
+
+    This utility traverses the PyTree structure and produces a flat dictionary
+    where keys represent the path to each leaf node using dot notation. This
+    is particularly useful for logging complex nested `State` objects to
+    flat metric logging systems like MLflow.
 
     Args:
-        tree: The PyTree to flatten.
-        prefix: Optional prefix for keys.
-        separator: Separator for nested keys.
+        tree: The PyTree object to flatten (e.g., `State`, dict, list).
+        prefix: An optional string to prepend to all generated keys.
+        separator: The string used to separate path components. Defaults to ".".
 
     Returns:
-        dict[str, Any]: Flattened dictionary.
+        A dictionary mapping flattened string keys to the leaf values of the tree.
+
+    Example:
+        >>> tree = {"x": 10, "sub": {"y": 20}}
+        >>> flatten_pytree(tree)
+        {'x': 10, 'sub.y': 20}
     """
     flat_dict = {}
 
@@ -49,13 +59,24 @@ def flatten_pytree(tree: Any, prefix: str = "", separator: str = ".") -> dict[st
 def unflatten_pytree[T](flat_dict: dict[str, Any], structure: T, separator: str = ".") -> T:
     """Populates a PyTree structure with values from a flattened dictionary.
 
+    This function attempts to reconstruct the values of a PyTree by looking up
+    keys in a flattened dictionary that correspond to the paths in the `structure`.
+    Leaves not found in the dictionary are kept as is from the structure.
+
     Args:
-        flat_dict: Dictionary with dot-notation keys.
-        structure: A PyTree with the target structure.
-        separator: Separator used in keys.
+        flat_dict: A dictionary containing flattened keys and values.
+        structure: A PyTree instance defining the target structure.
+        separator: The separator used in the flattened keys. Defaults to ".".
 
     Returns:
-        T: The structure populated with values from flat_dict.
+        A new PyTree with the same structure as `structure`, but with leaves
+        updated from `flat_dict`.
+
+    Example:
+        >>> flat = {"x": 100, "sub.y": 200}
+        >>> structure = {"x": 0, "sub": {"y": 0}}
+        >>> unflatten_pytree(flat, structure)
+        {'x': 100, 'sub': {'y': 200}}
     """
     # We traverse the structure and look up values in flat_dict using the generated path key.
 
@@ -83,15 +104,25 @@ def unflatten_pytree[T](flat_dict: dict[str, Any], structure: T, separator: str 
 
 
 def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> dict[str, Any]:
-    """Flattens a Config object into a dictionary.
+    """Flattens a Config object (Pydantic model) into a dictionary.
+
+    It uses `model_dump()` to get the configuration as a dictionary and then
+    flattens any nested dictionaries.
 
     Args:
-        config: The Config object.
-        prefix: Optional prefix.
-        separator: Separator.
+        config: The `Config` instance to flatten.
+        prefix: An optional string to prepend to keys.
+        separator: The separator for nested keys. Defaults to ".".
 
     Returns:
-        dict[str, Any]: Flattened dict.
+        A flattened dictionary representation of the configuration.
+
+    Example:
+        >>> class MyConfig(Config):
+        ...     nested: dict = {"a": 1}
+        >>> config = MyConfig()
+        >>> flatten_config(config)
+        {'nested.a': 1}
     """
     # Use Pydantic's model_dump to get nested dict
     d = config.model_dump()
@@ -111,16 +142,30 @@ def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> di
     return flat
 
 
-def unflatten_config[C: Config](flat_dict: dict[str, Any], config_cls: type[C], separator: str = ".") -> C:
+def unflatten_config[C: Config](
+    flat_dict: dict[str, Any], config_cls: type[C], separator: str = "."
+) -> C:
     """Reconstructs a Config object from a flattened dictionary.
 
+    This function unflattens a dictionary into a nested structure and then
+    validates it against the Pydantic model `config_cls`.
+
     Args:
-        flat_dict: Flattened dictionary.
-        config_cls: The Config class.
-        separator: Separator.
+        flat_dict: The flattened dictionary containing configuration values.
+        config_cls: The class of the `Config` object to reconstruct.
+        separator: The separator used in the flattened keys. Defaults to ".".
 
     Returns:
-        C: Instance of config_cls.
+        An instance of `config_cls` populated with values from `flat_dict`.
+
+    Raises:
+        ValueError: If there is a key conflict (e.g., 'a' is both a value and a container).
+        ValidationError: If the reconstructed data fails Pydantic validation.
+
+    Example:
+        >>> flat = {"nested.a": 1}
+        >>> unflatten_config(flat, MyConfig)
+        MyConfig(nested={'a': 1})
     """
     # Unflatten dict
     nested = {}
