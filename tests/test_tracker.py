@@ -2,7 +2,7 @@ import mlflow
 import yaml
 
 from researchlab import ExperimentTracker
-from researchlab.utils import get_git_state
+from researchlab.tracking.utils import get_git_state
 
 
 def test_git_state_capture(mock_repo):

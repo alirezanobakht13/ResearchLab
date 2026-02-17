@@ -1,3 +1,3 @@
-from .tracker import ExperimentTracker
+from .tracking.tracker import ExperimentTracker
 
 __all__ = ["ExperimentTracker"]

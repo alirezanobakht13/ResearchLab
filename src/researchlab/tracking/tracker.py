@@ -4,7 +4,7 @@ from typing import Any
 import mlflow
 import yaml
 
-from .utils import generate_run_id, get_git_state
+from .utils import generate_run_id, get_git_state, log_flattened_params
 
 
 class ExperimentTracker:
@@ -96,21 +96,7 @@ class ExperimentTracker:
             try:
                 config = yaml.safe_load(f)
                 if isinstance(config, dict):
-                    self._log_dict_as_params(config)
+                    log_flattened_params(config)
                 mlflow.log_artifact(str(path))
             except yaml.YAMLError as e:
                 print(f"Error parsing YAML config: {e}")
-
-    def _log_dict_as_params(self, d: dict[str, Any], prefix: str = ""):
-        """Recursively logs a dictionary as MLflow parameters.
-
-        Args:
-            d: The dictionary to log.
-            prefix: Optional prefix for parameter keys (used for recursion).
-        """
-        for k, v in d.items():
-            key = f"{prefix}{k}" if prefix else k
-            if isinstance(v, dict):
-                self._log_dict_as_params(v, prefix=f"{key}.")
-            else:
-                mlflow.log_param(key, v)

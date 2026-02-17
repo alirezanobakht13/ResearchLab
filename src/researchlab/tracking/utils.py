@@ -84,3 +84,17 @@ def get_git_state(repo_path: str = ".") -> dict[str, Any]:
         "patch": patch,
         "is_dirty": is_dirty
     }
+
+def log_flattened_params(d: dict[str, Any], prefix: str = "") -> None:
+    """Recursively logs a dictionary as flattened MLflow parameters.
+
+    Args:
+        d: The dictionary to log.
+        prefix: Optional prefix for parameter keys (used for recursion).
+    """
+    for k, v in d.items():
+        key = f"{prefix}{k}" if prefix else k
+        if isinstance(v, dict):
+            log_flattened_params(v, prefix=f"{key}.")
+        else:
+            mlflow.log_param(key, v)

@@ -1,7 +1,7 @@
 from typer.testing import CliRunner
 
 from researchlab import ExperimentTracker
-from researchlab.cli import app
+from researchlab.tracking.cli import app
 
 runner = CliRunner()
 
