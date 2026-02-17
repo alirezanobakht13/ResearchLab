@@ -1,22 +1,19 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, TypeVar
+from pathlib import Path
+from typing import Any
 
 import equinox as eqx
 import mlflow
-from pathlib import Path
 
-from .core import State, Config
-# Assuming tracking is installed and available, as we are in the same package
 from researchlab.tracking.utils import log_flattened_params
 
-S = TypeVar("S", bound=State)
-C = TypeVar("C", bound=Config)
+from .core import Config, State
 
 # -----------------------------------------------------------------------------
 # Data Provider
 # -----------------------------------------------------------------------------
 
-class DataProvider(ABC, Generic[S]):
+class DataProvider[S: State](ABC):
     """Abstract base class for data loading."""
     
     @abstractmethod
@@ -33,7 +30,7 @@ class DataProvider(ABC, Generic[S]):
 # Telemetry
 # -----------------------------------------------------------------------------
 
-class Telemetry(ABC, Generic[S, C]):
+class Telemetry[S: State, C: Config](ABC):
     """Abstract base class for logging."""
     
     @abstractmethod
@@ -46,7 +43,7 @@ class Telemetry(ABC, Generic[S, C]):
         """Log hyperparameters."""
         ...
 
-class MLFlowTelemetry(Telemetry[S, C]):
+class MLFlowTelemetry[S: State, C: Config](Telemetry[S, C]):
     """Concrete implementation of Telemetry using MLflow.
     
     Assumes an active MLflow run exists (e.g. started by ExperimentTracker).
@@ -79,7 +76,7 @@ class MLFlowTelemetry(Telemetry[S, C]):
 # Persister
 # -----------------------------------------------------------------------------
 
-class Persister(ABC, Generic[S, C]):
+class Persister[S: State, C: Config](ABC):
     """Abstract base class for saving/loading checkpoints."""
     
     @abstractmethod
@@ -101,14 +98,15 @@ class Persister(ABC, Generic[S, C]):
         """
         ...
 
-class EquinoxPersister(Persister[S, C]):
+class EquinoxPersister[S: State, C: Config](Persister[S, C]):
     """Concrete implementation using equinox.tree_serialise_leaves (safetensors)."""
     
     def save(self, state: S, config: C, step: int, path: Path) -> None:
-        """Saves state to a .eqx file. Config is not saved by EquinoxPersister 
-        as it is usually static, but for completeness we could pickle it or verify 
-        if config is a PyTree. 
+        """Saves state to a .eqx file.
         
+        Config is not saved by EquinoxPersister as it is usually static, 
+        but for completeness we could pickle it or verify if config is a PyTree. 
+
         For now, we only serialize the State using equinox, assuming Config is handled separately
         or is reconstructible.
         """
@@ -131,7 +129,7 @@ class EquinoxPersister(Persister[S, C]):
 # Visualizer
 # -----------------------------------------------------------------------------
 
-class Visualizer(ABC, Generic[S]):
+class Visualizer[S: State](ABC):
     """Abstract base class for rendering."""
     
     @abstractmethod

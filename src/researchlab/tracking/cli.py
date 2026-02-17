@@ -9,6 +9,7 @@ from .utils import find_run_by_rlab_id
 
 app = typer.Typer(help="Research Lab CLI - Manage dirty runs and experiment branches.")
 
+
 @app.command()
 def restore(run_id: str):
     """Restore a run by creating a new branch and applying the saved patch.
@@ -44,7 +45,7 @@ def restore(run_id: str):
     # Download and apply patch
     client = mlflow.tracking.MlflowClient()
     local_path = Path(client.download_artifacts(run.info.run_id, "run.patch"))
-    
+
     if local_path.exists():
         typer.echo(f"Applying patch from {local_path}...")
         try:
@@ -56,6 +57,7 @@ def restore(run_id: str):
     else:
         typer.echo("Note: No patch file found for this run (clean run).")
 
+
 @app.command(name="list")
 def list_branches():
     """List all rlab experiment branches.
@@ -64,12 +66,13 @@ def list_branches():
     """
     repo = git.Repo(".", search_parent_directories=True)
     exp_branches = [b.name for b in repo.branches if b.name.startswith("experiment/")]
-    
+
     if not exp_branches:
         typer.echo("No experiment branches found.")
     else:
         for b in exp_branches:
             typer.echo(b)
+
 
 @app.command()
 def delete(run_id: str, force: bool = False):
@@ -81,13 +84,13 @@ def delete(run_id: str, force: bool = False):
     """
     repo = git.Repo(".", search_parent_directories=True)
     branch_name = f"experiment/{run_id}"
-    
+
     if branch_name not in repo.branches:
         typer.echo(f"Branch {branch_name} not found.")
         raise typer.Exit(code=1)
 
     typer.echo(f"Deleting branch {branch_name}...")
-    
+
     if repo.active_branch.name == branch_name:
         # Try to find a safe branch to switch to
         for fallback in ["main", "master"]:
@@ -102,9 +105,10 @@ def delete(run_id: str, force: bool = False):
                     typer.echo(f"Switching to {b.name} before deletion...")
                     b.checkout()
                     break
-    
+
     repo.delete_head(branch_name, force=force)
     typer.echo("Done.")
+
 
 @app.command()
 def diff(run_id_1: str, run_id_2: str):
@@ -136,7 +140,7 @@ def diff(run_id_1: str, run_id_2: str):
         path2 = Path(tmpdir) / "run2"
 
         repo = git.Repo(".", search_parent_directories=True)
-        
+
         for run, path, rid in [(run1, path1, run_id_1), (run2, path2, run_id_2)]:
             path.mkdir()
             # Clone current repo to temp path to have the history
@@ -144,7 +148,7 @@ def diff(run_id_1: str, run_id_2: str):
             base_commit = run.data.tags.get("rlab.base_commit")
             temp_repo.head.reference = temp_repo.commit(base_commit)
             temp_repo.head.reset(index=True, working_tree=True)
-            
+
             patch_path = Path(client.download_artifacts(run.info.run_id, "run.patch"))
             if patch_path.exists() and patch_path.stat().st_size > 0:
                 try:
@@ -166,6 +170,7 @@ def diff(run_id_1: str, run_id_2: str):
                 typer.echo(diff_output)
             else:
                 typer.echo(f"Error calculating diff: {e}", err=True)
+
 
 if __name__ == "__main__":
     app()

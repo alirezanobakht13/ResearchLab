@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Any
 
 import mlflow
 import yaml
@@ -45,9 +44,9 @@ class ExperimentTracker:
         """
         if tracking_uri:
             mlflow.set_tracking_uri(tracking_uri)
-        
+
         mlflow.set_experiment(experiment_name)
-        
+
         self.run_name = run_name or generate_run_id()
         self.active_run = None
 
@@ -58,12 +57,12 @@ class ExperimentTracker:
             ExperimentTracker: The instance of the tracker.
         """
         self.active_run = mlflow.start_run(run_name=self.run_name)
-        
+
         # Capture and log Git state
         git_state = get_git_state()
         mlflow.set_tag("rlab.base_commit", git_state["base_commit"])
         mlflow.set_tag("rlab.run_id", self.run_name)
-        
+
         # Save patch file as an artifact
         if git_state["patch"]:
             patch_path = Path("run.patch")
@@ -71,7 +70,7 @@ class ExperimentTracker:
                 f.write(git_state["patch"])
             mlflow.log_artifact(str(patch_path))
             patch_path.unlink()
-        
+
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):

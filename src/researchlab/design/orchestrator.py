@@ -1,12 +1,10 @@
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from .core import Config, Kernel, State
 from .infra import DataProvider, Persister, Telemetry, Visualizer
 
-S = TypeVar("S", bound=State)
-C = TypeVar("C", bound=Config)
 
-class Loop(Generic[S, C]):
+class Loop[S: State, C: Config]:
     """A generic training loop implementation that ties Core and Infrastructure together."""
 
     def __init__(
@@ -19,7 +17,8 @@ class Loop(Generic[S, C]):
         persister: Persister[S, C] | None = None,
         visualizer: Visualizer[S] | None = None,
     ):
-        """
+        """Initializes the loop.
+
         Args:
             config: Immutable hyperparameters.
             initial_state: Initial simulation state.

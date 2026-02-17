@@ -1,16 +1,8 @@
-from typing import Any, Callable, Generic, Protocol, TypeVar, runtime_checkable
+from collections.abc import Callable
+from typing import Any, Protocol, runtime_checkable
 
 import equinox as eqx
 from pydantic import BaseModel, ConfigDict
-
-# -----------------------------------------------------------------------------
-# Type Variables
-# -----------------------------------------------------------------------------
-S = TypeVar("S", bound="State")
-C = TypeVar("C", bound="Config")
-P = TypeVar("P")
-R = TypeVar("R")
-
 
 # -----------------------------------------------------------------------------
 # Core Components
@@ -30,11 +22,10 @@ class State(eqx.Module):
 
     Must be a JAX PyTree (handled by Equinox).
     """
-    pass
 
 
 @runtime_checkable
-class Kernel(Protocol[P, R]):
+class Kernel[P, R](Protocol):
     """Protocol for pure functions."""
     def __call__(self, *args: P, **kwargs: Any) -> R: ...
 
@@ -43,7 +34,7 @@ class Kernel(Protocol[P, R]):
 # Selector / Lenses
 # -----------------------------------------------------------------------------
 
-class SelectedKernel(eqx.Module, Generic[S, C, R]):
+class SelectedKernel[S: State, C: Config, R](eqx.Module):
     """The wrapped kernel returned by Selector.
     
     It is an Equinox Module, so it can be JIT-compiled or differentiated
@@ -62,7 +53,7 @@ class SelectedKernel(eqx.Module, Generic[S, C, R]):
         return self._func
 
 
-class Selector(Generic[S, C]):
+class Selector[S: State, C: Config]:
     """A decorator/higher-order function to bind State and Config to Kernel arguments.
 
     Example:
@@ -78,18 +69,19 @@ class Selector(Generic[S, C]):
         self,
         extractor: Callable[[S, C], tuple[tuple[Any, ...], dict[str, Any]]],
     ):
-        """
+        """Initializes the Selector.
+
         Args:
             extractor: A function that takes (state, config) and returns
                        ((args...), {kwargs...}) to be passed to the kernel.
         """
         self.extractor = extractor
 
-    def __call__(self, func: Callable[..., R]) -> SelectedKernel[S, C, R]:
+    def __call__[R](self, func: Callable[..., R]) -> SelectedKernel[S, C, R]:
         return SelectedKernel(func, self.extractor)
 
 
-class FieldSelector(Selector[S, C]):
+class FieldSelector[S: State, C: Config](Selector[S, C]):
     """A simplified Selector that maps kernel arguments to State/Config fields using dot-notation strings.
     
     Example:
@@ -101,7 +93,8 @@ class FieldSelector(Selector[S, C]):
         # config.y -> passed to y
     """
     def __init__(self, **mappings: str):
-        """
+        """Initializes the FieldSelector.
+
         Args:
             **mappings: keys are kernel argument names, values are dot-notation paths
                         starting with 'state.' or 'config.'.
@@ -131,7 +124,7 @@ class FieldSelector(Selector[S, C]):
                                  idx = int(part)
                                  obj = obj[idx]
                              except (ValueError, TypeError, IndexError, KeyError):
-                                 raise AttributeError(f"Could not resolve path '{path}': '{part}' not found.")
+                                 raise AttributeError(f"Could not resolve path '{path}': '{part}' not found.") from None
                 kwargs[arg_name] = obj
             return (), kwargs
             
