@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
@@ -9,10 +10,10 @@ from researchlab.tracking.utils import log_flattened_params
 
 from .core import Config, State
 
-
 # -----------------------------------------------------------------------------
 # Data Provider
 # -----------------------------------------------------------------------------
+
 
 class DataProvider[S: State](ABC):
     """Abstract base class for providing data batches to the training loop.
@@ -52,6 +53,7 @@ class DataProvider[S: State](ABC):
 # -----------------------------------------------------------------------------
 # Telemetry
 # -----------------------------------------------------------------------------
+
 
 class Telemetry[S: State, C: Config](ABC):
     """Abstract base class for logging metrics and parameters.
@@ -99,7 +101,6 @@ class MLFlowTelemetry[S: State, C: Config](Telemetry[S, C]):
 
     def __init__(self):
         """Initializes the MLFlowTelemetry instance."""
-        pass
 
     def log_metrics(self, metrics: dict[str, float], step: int) -> None:
         """Logs scalar metrics to MLflow.
@@ -138,6 +139,7 @@ class MLFlowTelemetry[S: State, C: Config](Telemetry[S, C]):
 # Persister
 # -----------------------------------------------------------------------------
 
+
 class Persister[S: State, C: Config](ABC):
     """Abstract base class for saving and loading checkpoints.
 
@@ -158,9 +160,7 @@ class Persister[S: State, C: Config](ABC):
         ...
 
     @abstractmethod
-    def load(
-        self, path: Path, state_structure: S, config_structure: C
-    ) -> tuple[S, C, int]:
+    def load(self, path: Path, state_structure: S, config_structure: C) -> tuple[S, C, int]:
         """Loads state and config from a checkpoint.
 
         Args:
@@ -210,9 +210,7 @@ class EquinoxPersister[S: State, C: Config](Persister[S, C]):
         path.parent.mkdir(parents=True, exist_ok=True)
         eqx.tree_serialise_leaves(path, state)
 
-    def load(
-        self, path: Path, state_structure: S, config_structure: C
-    ) -> tuple[S, C, int]:
+    def load(self, path: Path, state_structure: S, config_structure: C) -> tuple[S, C, int]:
         """Loads state from a .eqx file.
 
         Note: This implementation currently only restores State.
@@ -235,21 +233,80 @@ class EquinoxPersister[S: State, C: Config](Persister[S, C]):
 # Visualizer
 # -----------------------------------------------------------------------------
 
-class Visualizer[S: State](ABC):
-    """Abstract base class for rendering the simulation state.
 
-    Visualizers produce visual representations of the state, such as images,
-    videos, or plots.
+class Visualizer[S: State](ABC):
+    """Abstract base class for rendering and recording simulation states.
+
+    This abstraction supports three main functionalities:
+    1. Generating frames from states via `render(state)`.
+    2. Displaying the last generated frame via `show()`.
+    3. Recording/Streaming frames via the `_record()` hook (if `is_recording=True`).
     """
 
-    @abstractmethod
+    def __init__(self, record: bool = False, fps: None | int = None):
+        """Initializes the visualizer.
+
+        Args:
+            record: If True, enable recording mode to trigger the `_record()` hook.
+            fps: Optional frames per second for recording and showing.
+        """
+        self.is_recording = record
+        self._fps = fps
+        self._frame_interval = 1.0 / fps if fps is not None else None
+        self._last_frame: Any | None = None
+        self._last_show_time: float = time.time()  # For FPS control in show()
+
     def render(self, state: S) -> Any:
-        """Render the current state.
+        """Generate a frame and trigger the `_record()` hook if recording is enabled.
 
         Args:
             state: The state to render.
 
         Returns:
-            The rendered artifact (e.g., image array).
+            The rendered frame (e.g., image array).
+        """
+        frame = self._render_frame(state)
+        self._last_frame = frame
+        if self.is_recording:
+            self._record()
+        return frame
+
+    @abstractmethod
+    def _render_frame(self, state: S) -> Any:
+        """Implementation-specific frame generation logic."""
+        ...
+
+    @abstractmethod
+    def _record(self) -> None:
+        """Hook called at the end of `render` if `is_recording` is True.
+
+        Subclasses should implement this to stream the frame to a video file,
+        buffer it selectively, or perform other persistence tasks. The last
+        rendered frame is available in `self._last_frame`.
+        """
+
+    def show(self) -> None:
+        """Display the last rendered frame to the user."""
+        if self._last_frame is not None:
+            self._show_frame(self._last_frame)
+
+    @abstractmethod
+    def _show_frame(self, frame: Any) -> None:
+        """Implementation-specific display logic.
+
+        `self._frame_interval` and `self._last_show_time` can
+        be used to control the display rate if `fps` was set.
+
+        Args:
+            frame: The frame to display (e.g., image array).
         """
         ...
+
+    @abstractmethod
+    def close(self) -> None:
+        """Clean up any resources used by the visualizer (e.g., close windows, release video writers)."""
+        ...
+
+    def __del__(self):
+        """Ensure resources are cleaned up when the visualizer is garbage collected."""
+        self.close()

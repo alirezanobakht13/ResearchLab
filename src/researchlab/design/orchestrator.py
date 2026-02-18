@@ -83,6 +83,7 @@ class Loop[S: State, C: Config]:
             # 5. Visualization (Example: every N steps)
             if self.visualizer:
                 # self.visualizer.render(self.state)
+                # self.visualizer.show()
                 pass
 
     def save_checkpoint(self, path: Any): # using Any for path to avoid circular imports if Path is needed
