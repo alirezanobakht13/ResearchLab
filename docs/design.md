@@ -1,68 +1,66 @@
 # Design Module
 
-The `researchlab.design` module provides a set of abstractions to structure machine learning research code. It is not just a utility library; it embodies a specific **design philosophy** inspired by functional programming and the principles of separation of concerns.
+The `researchlab.design` module provides a set of abstractions to structure machine learning research code. It is not just a utility library; it embodies a specific **design philosophy** inspired by functional programming and the principles of separation of concerns and Reinforcement Learning in mind.
 
-This module is most useful if you adopt this philosophy, which strictly separates your "Pure Math" from your "Infrastructure".
+## 1. The core (Pure & Deterministic)
 
-## Philosophy: Core vs. Infrastructure
+This section contains only data and math. It has no knowledge of disks, networks, or GPUs.
 
-Research code often becomes a tangled mess where training logic is mixed with logging, checkpointing, and data loading. This makes code hard to test, debug, and reuse.
+### Hyperparameters (config)
 
-`rlab` proposes a clean split:
+- Immutable metadata defined at the start of a run.
+- Constant during the run.
+- Should be easily saved and loaded (e.g. yaml, json, etc.)
 
-1.  **The Core (Pure & Deterministic):** Contains only data and math. It has _no knowledge_ of disks, networks, or GPUs. It is side-effect free.
-2.  **The Infrastructure (Impure & Resourceful):** Handles the "Real World" (saving files, logging to MLflow, loading data). It has internal state (like cache or network connections) but is never part of the mathematical snapshot.
-3.  **The Orchestrator:** The only place where Core and Infrastructure meet.
+### State (The Snapshot)
 
-## 1. The Core (Pure & Deterministic)
+- The minimum set of variables required to perfectly resume a run.
+- Should support nested structures and be easily vectorized. (e.g. using PyTree)
+- Should be easily saved and loaded (e.g. safetensors, msgpack, etc.)
+- Some included components:
+  - Model params (e.g. equinox object)
+  - Optimizer state
+  - Experience (Memory) state
+  - Clock (step, episode, epoch, wall time) state
+  - RNG state
 
-This layer defines _what_ your experiment is mathematically. It should be easily unit-testable without mocking any external services.
+### Pure Kernels (The Logic)
 
-### State (`State`)
-
-The **State** is the minimum set of variables required to perfectly resume a run. It represents the "snapshot" of your experiment at any tick.
-
-- **Must be a JAX PyTree:** We use `equinox.Module` to ensure it works with JAX transformations (`jit`, `grad`, `vmap`).
-- **Contains:** Model parameters, optimizer state, step counter, RNG keys.
-- **Does NOT Contain:** Data loaders, loggers, or file handles.
-
-### Config (`Config`)
-
-The **Config** holds immutable metadata and hyperparameters defined at the start of a run.
-
-- **Immutable:** Should not change during execution.
-- **Validated:** We use `pydantic` to ensure types and constraints.
-
-### Kernels & Selectors (`Selector`)
-
-**Kernels** are pure functions that perform the actual logic (e.g., `update_step`, `compute_loss`).
-
-- **Granular:** They should take specific primitive arguments (e.g., `params`, `batch`, `learning_rate`) rather than the whole `State` object. This makes them trivial to test.
-
-**Selectors** act as "lenses" or adapters. They map the complex `State` and `Config` structure to the granular arguments required by Kernels.
-
-- **Decoupling:** Your math doesn't need to know the shape of your `State`. `FieldSelector` lets you wire them up declaratively.
+- Granular Functions: Functions that take specific primitive arguments (e.g., compute_loss(pixels, weights)). This makes testing trivial.
+- State-Aware Wrappers (Lenses): Higher-order functions (decorators) or "selectors" that extract the necessary data from the State and Hyperparameters to call the granular functions (e.g., compute_loss(state)). This provides convenience for the main logic while keeping the core computations testable and profiled.
+- They should be side-effect free and vectorizable.
 
 ## 2. Infrastructure (Impure & Resourceful)
 
-This layer handles side effects. These components observe the Core but typically do not modify the mathematical state directly (except via data injection).
+This section handles the "Real World." These objects can have internal state (caching) but are never included in the "Core State" snapshot.
 
-### Infrastructure Components
+### Data Providers (The Source)
 
-- **DataProvider:** Handles high-frequency input (e.g., streaming batches).
-- **Telemetry:** Handles medium-frequency output (logging metrics/params). `MLFlowTelemetry` is provided out-of-the-box.
-- **Persister:** Handles low-frequency persistence (saving checkpoints). `EquinoxPersister` handles saving the `State` PyTree.
-- **Visualizer:** Handles rendering (creating images/videos from State).
+- High-frequency input (e.g. handles the loading of large image patches).
 
-## 3. The Orchestrator (`Loop`)
+### Telemetry (The Reporter)
 
-The **Loop** is the glue code. It manages the flow of time and interaction between layers.
+- Medium-frequency output. Handles logging, metrics, and debugging.
+- Exact use or a wrapper around stuff like mlflow, tensorboard, wandb, etc.
+- Observes the State and Config but cannot modify them.
 
-It follows a standard cycle:
+### Persister (The Vault)
 
-1.  **Input:** Request data from `DataProvider`.
-2.  **Update:** Call the Pure Kernel (wrapped by Selector) with `State`, `Config`, and Data.
-3.  **Output:** Receive new `State` and Metrics.
-4.  **Side Effects:** Send Metrics to `Telemetry`, save `State` via `Persister`.
+- Low-frequency persistence. Handles saving/loading.
+- Ensures atomic saves.
 
-By using `researchlab.design`, you simply define your Core and Infrastructure components, and the `Loop` handles the orchestration boilerplate for you.
+### Visualizer (The Renderer)
+
+- Handles rendering and visualization of the environments, video recording, etc.
+- Operates on the State to produce frames (not able to change State); strictly separated from the training math.
+
+## 3. The Orchestrator (The Loop)
+
+This is the only place where the Core and Infrastructure meet.
+
+- Example logic:
+  1. Request data from Provider based on current State.clock.
+  2. Call the Pure Kernel with State, Config, and the Provider Payload.
+  3. Receive a New State and Metrics.
+  4. Send Metrics to Telemetry.
+  5. Periodically send State and Config to Persister.
