@@ -76,7 +76,7 @@ def unflatten_pytree[T](flat_dict: dict[str, Any], structure: T, separator: str 
 
     Example:
         ```python
-        flat = {'x': 100, 'sub.y': 200}
+        flat = {"x": 100, "sub.y": 200}
         structure = {"x": 0, "sub": {"y": 0}}
         print(unflatten_pytree(flat, structure))
         # {'x': 100, 'sub': {'y': 200}}
@@ -125,6 +125,8 @@ def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> di
         ```python
         class MyConfig(Config):
             nested: dict = {"a": 1}
+
+
         config = MyConfig()
         print(flatten_config(config))
         # {'nested.a': 1}
@@ -148,7 +150,9 @@ def flatten_config(config: Config, prefix: str = "", separator: str = ".") -> di
     return flat
 
 
-def unflatten_config[C: Config](flat_dict: dict[str, Any], config_cls: type[C], separator: str = ".") -> C:
+def unflatten_config[C: Config](
+    flat_dict: dict[str, Any], config_cls: type[C], separator: str = "."
+) -> C:
     """Reconstructs a Config object from a flattened dictionary.
 
     This function unflattens a dictionary into a nested structure and then
@@ -168,7 +172,7 @@ def unflatten_config[C: Config](flat_dict: dict[str, Any], config_cls: type[C], 
 
     Example:
         ```python
-        flat = {'nested.a': 1}
+        flat = {"nested.a": 1}
         print(unflatten_config(flat, MyConfig))
         # MyConfig(nested={'a': 1})
         ```

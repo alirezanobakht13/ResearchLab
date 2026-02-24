@@ -31,3 +31,4 @@ nav:
     - Design: design.md
   - Examples: examples.md
   - API Reference: api.md
+  - JAX Reference: jax.md

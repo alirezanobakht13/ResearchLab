@@ -71,6 +71,18 @@ uv run ruff check .
 uv run ruff format .
 ```
 
+### Documentation
+
+The project uses `mkdocs` with `invoke` tasks for documentation.
+
+```bash
+# Build documentation
+uv run inv build-docs
+
+# Serve documentation locally
+uv run inv serve-docs
+```
+
 ## Implementation Details & Conventions
 
 ### Tracking Module
@@ -91,3 +103,15 @@ uv run ruff format .
 - Use Python 3.12+ syntax (e.g., `class Foo[T]:`).
 - Google-style docstrings for public APIs.
 - Strict typing using standard library and `jaxtyping` where applicable.
+
+## Versioning and Releases
+
+This project follows [Semantic Versioning (SemVer)](https://semver.org/).
+
+- **Versioning Tool:** [python-semantic-release](https://python-semantic-release.readthedocs.io/) is used to automate versioning and changelog generation.
+- **Commit Standards:** Commit messages **must** follow [Conventional Commits](https://www.conventionalcommits.org/). This is mandatory for `python-semantic-release` to function.
+  - `feat: ...` -> MINOR version bump.
+  - `fix: ...` -> PATCH version bump.
+  - `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `chore:`, `ci:`, `build:` -> No version bump (usually).
+  - `BREAKING CHANGE:` in the footer or `!` after the type -> MAJOR version bump.
+- **Automation:** Version strings are maintained in `pyproject.toml` and `src/researchlab/__version__.py`.
