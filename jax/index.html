@@ -1,0 +1,2229 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../api/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>JAX Reference - Research Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jax-the-missing-manual-for-research" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Research Lab" class="md-header__button md-logo" aria-label="Research Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Research Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JAX Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../tracking/" class="md-tabs__link">
+          
+  
+  
+  Modules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  JAX Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Research Lab" class="md-nav__button md-logo" aria-label="Research Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Research Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAX Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAX Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-core-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Core Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-managing-state-the-state-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Managing State (The State Pattern)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Managing State (The State Pattern)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-pytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a PyTree?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-state-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your State Object
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-functional-update-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The "Functional Update" Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-vmap-and-in_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. vmap and in_axes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. vmap and in_axes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-in_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding in_axes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding in_axes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-a-batch-of-states-shared-dt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario A: Batch of States, Shared dt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-b-batch-of-states-batch-of-dts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario B: Batch of States, Batch of dts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-c-complex-pytree-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario C: Complex PyTree Structures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-in_axes-vs-out_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing in_axes vs out_axes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-randomness-the-key-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Randomness (The "Key" Pattern)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-control-flow-scan-and-cond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Control Flow: scan and cond
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Control Flow: scan and cond">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loops-scan-vs-python-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loops: scan vs Python Loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditionals-cond-vs-python-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conditionals: cond vs Python if
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jit-compilation-jaxjit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. JIT Compilation (@jax.jit)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cheatsheet-common-dimension-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cheatsheet: Common Dimension Operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-debugging-jax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Debugging JAX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-useful-apis-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Useful APIs / Cheatsheet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Useful APIs / Cheatsheet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creation &amp; Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-manipulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array Manipulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#math-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math &amp; Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Transformations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-einops-tensor-magic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Einops (Tensor Magic)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Einops (Tensor Magic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rearrange-permute-flatten-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rearrange (Permute, Flatten, Split)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reduce-pool-mean-max" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Reduce (Pool, Mean, Max)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-repeat-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Repeat (Broadcast)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pytrees-jax-tree-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. PyTrees &amp; JAX Tree Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. PyTrees &amp; JAX Tree Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-jaxtree-functions-with-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common jax.tree Functions with Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common jax.tree Functions with Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jaxtreemap-mapping-over-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. jax.tree.map (Mapping over leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jaxtreeleaves-extracting-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. jax.tree.leaves (Extracting leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jaxtreereduce-reducing-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. jax.tree.reduce (Reducing leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-jaxtreeflatten-and-jaxtreeunflatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. jax.tree.flatten and jax.tree.unflatten
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-pytrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom PyTrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-equinox-tree-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Equinox Tree Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Equinox Tree Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-eqxtree_at-functional-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. eqx.tree_at (Functional Update)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-eqxpartition-and-eqxcombine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. eqx.partition and eqx.combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-eqxtree_serialise_leaves-and-eqxtree_deserialise_leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. eqx.tree_serialise_leaves and eqx.tree_deserialise_leaves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-filtering-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Filtering Utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-core-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Core Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-managing-state-the-state-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Managing State (The State Pattern)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Managing State (The State Pattern)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-pytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a PyTree?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-state-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your State Object
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-functional-update-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The "Functional Update" Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-vmap-and-in_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. vmap and in_axes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. vmap and in_axes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-in_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding in_axes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding in_axes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-a-batch-of-states-shared-dt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario A: Batch of States, Shared dt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-b-batch-of-states-batch-of-dts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario B: Batch of States, Batch of dts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-c-complex-pytree-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario C: Complex PyTree Structures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-in_axes-vs-out_axes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing in_axes vs out_axes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-randomness-the-key-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Randomness (The "Key" Pattern)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-control-flow-scan-and-cond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Control Flow: scan and cond
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Control Flow: scan and cond">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loops-scan-vs-python-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loops: scan vs Python Loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditionals-cond-vs-python-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conditionals: cond vs Python if
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jit-compilation-jaxjit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. JIT Compilation (@jax.jit)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cheatsheet-common-dimension-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cheatsheet: Common Dimension Operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-debugging-jax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Debugging JAX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-useful-apis-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Useful APIs / Cheatsheet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Useful APIs / Cheatsheet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creation &amp; Initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-manipulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array Manipulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#math-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math &amp; Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Transformations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-einops-tensor-magic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Einops (Tensor Magic)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Einops (Tensor Magic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rearrange-permute-flatten-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rearrange (Permute, Flatten, Split)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reduce-pool-mean-max" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Reduce (Pool, Mean, Max)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-repeat-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Repeat (Broadcast)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pytrees-jax-tree-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. PyTrees &amp; JAX Tree Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. PyTrees &amp; JAX Tree Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-jaxtree-functions-with-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common jax.tree Functions with Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common jax.tree Functions with Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jaxtreemap-mapping-over-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. jax.tree.map (Mapping over leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jaxtreeleaves-extracting-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. jax.tree.leaves (Extracting leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jaxtreereduce-reducing-leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. jax.tree.reduce (Reducing leaves)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-jaxtreeflatten-and-jaxtreeunflatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. jax.tree.flatten and jax.tree.unflatten
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-pytrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom PyTrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-equinox-tree-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Equinox Tree Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Equinox Tree Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-eqxtree_at-functional-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. eqx.tree_at (Functional Update)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-eqxpartition-and-eqxcombine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. eqx.partition and eqx.combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-eqxtree_serialise_leaves-and-eqxtree_deserialise_leaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. eqx.tree_serialise_leaves and eqx.tree_deserialise_leaves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-filtering-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Filtering Utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="jax-the-missing-manual-for-research">JAX: The Missing Manual (for Research)</h1>
+<p>This guide serves as a practical, "cheatsheet-style" reference for using JAX. It focuses on the mental models required to use it effectively, specifically addressing common confusion points like dimensions, <code>vmap</code>, and state management.</p>
+<h2 id="1-the-core-mental-model">1. The Core Mental Model</h2>
+<p>JAX is not just "NumPy with GPU support." It is a <strong>compiler for function transformations</strong>.</p>
+<ul>
+<li><strong>Pure Functions:</strong> JAX assumes your functions are <em>pure</em>: same input, same output; no side effects (no printing*, no global state mutation).</li>
+<li><strong>Static vs. Traced:</strong> JAX traces your code once with "abstract tracers" (placeholders) to build a computation graph, then compiles it (XLA). Python control flow ( <code>if</code>, <code>for</code>) happens <em>during tracing</em>. If it depends on data, it vanishes unless you use JAX primitives (<code>jax.lax.cond</code>, <code>jax.lax.scan</code>).</li>
+</ul>
+<hr />
+<h2 id="2-managing-state-the-state-pattern">2. Managing State (The <code>State</code> Pattern)</h2>
+<p><code>equinox.Module</code> is a <strong>PyTree</strong>.</p>
+<h3 id="what-is-a-pytree">What is a PyTree?</h3>
+<p>A PyTree is just a container of arrays (lists, tuples, dicts, custom classes). JAX functions like <code>jit</code>, <code>grad</code>, and <code>vmap</code> operate on the <em>leaves</em> (the arrays inside) while preserving the <em>structure</em>.</p>
+<h3 id="your-state-object">Your <code>State</code> Object</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">equinox</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">eqx</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">eqx</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># These are the leaves (arrays)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">pos</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">vel</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="c1"># This is static metadata (ignored by JAX derivatives/batching)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">step_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">static</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Initialization</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">pos</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">vel</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">step_count</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="the-functional-update-rule">The "Functional Update" Rule</h3>
+<p>In JAX, <strong>you never mutate objects in place.</strong> You always return a new object.</p>
+<p><strong>❌ BAD (Mutating - Won't work in JIT):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">+=</span> <span class="mf">0.1</span>  <span class="c1"># Error! JAX arrays are immutable.</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">return</span> <span class="n">state</span>
+</span></code></pre></div>
+<p><strong>✅ GOOD (Functional - Returns new PyTree):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">equinox</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">eqx</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># &#39;eqx.tree_at&#39; is a helper to update PyTrees functionally</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># It says: &quot;Return a copy of &#39;state&#39; where &#39;pos&#39; is replaced by &#39;new_pos&#39;&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">new_pos</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="mf">0.1</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">state</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">new_pos</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">return</span> <span class="n">state</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3-vmap-and-in_axes">3. <code>vmap</code> and <code>in_axes</code></h2>
+<p><code>jax.vmap</code> (Vectorizing Map) transforms a function meant for a <em>single</em> sample into a function that handles a <em>batch</em> of samples.</p>
+<p><strong>The Golden Rule:</strong> <code>vmap</code> pushes a dimension down. If your input has shape <code>(10, 3)</code> and you <code>vmap</code> over it, inside the function, JAX sees shape <code>(3)</code>.</p>
+<h3 id="understanding-in_axes">Understanding <code>in_axes</code></h3>
+<p><code>in_axes</code> tells JAX <strong>which dimension is the batch dimension</strong> for each argument.</p>
+<p>Imagine a function:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># state.pos shape: (2,)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">return</span> <span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">vel</span> <span class="o">*</span> <span class="n">dt</span>
+</span></code></pre></div>
+<p>We want to run this on a <strong>batch of 100 states</strong>.</p>
+<h4 id="scenario-a-batch-of-states-shared-dt">Scenario A: Batch of States, Shared <code>dt</code></h4>
+<p>We have 100 states, but <code>dt</code> is the same for all of them.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Batch dimension is 0 for &#39;state&#39;, but &#39;dt&#39; is NOT batched (None).</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">batched_step</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Input shapes:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># batch_states: State(pos=(100, 2), vel=(100, 2))</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># dt: scalar</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">result</span> <span class="o">=</span> <span class="n">batched_step</span><span class="p">(</span><span class="n">batch_states</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Result shape: (100, 2)</span>
+</span></code></pre></div>
+<h4 id="scenario-b-batch-of-states-batch-of-dts">Scenario B: Batch of States, Batch of <code>dt</code>s</h4>
+<p>Each state has its own unique time delta.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Batch dimension is 0 for &#39;state&#39;, AND 0 for &#39;dt&#39;.</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">batched_step</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Input shapes:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># batch_states: State(pos=(100, 2), vel=(100, 2))</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># dts: (100,)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">result</span> <span class="o">=</span> <span class="n">batched_step</span><span class="p">(</span><span class="n">batch_states</span><span class="p">,</span> <span class="n">dts</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="scenario-c-complex-pytree-structures">Scenario C: Complex PyTree Structures</h4>
+<p>If your <code>State</code> is a complex nested tree, <code>in_axes=0</code> automatically means "the 0-th dimension of <em>every array leaf</em> inside this object".</p>
+<p>If you have a tuple <code>(x, y)</code> and you want <code>x</code> batched but <code>y</code> shared:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Function: f(pair) -&gt; where pair is (x, y)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># in_axes must match the structure of the arguments.</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># in_axes = (0, None)  &lt;-- WRONG, acts on the tuple itself.</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># in_axes = ((0, None),) &lt;-- CORRECT, acts on the contents of the first arg.</span>
+</span></code></pre></div>
+<p><em>Note: Usually, simpler signatures like <code>f(x, y)</code> are easier to manage than <code>f((x, y))</code>.</em></p>
+<h3 id="visualizing-in_axes-vs-out_axes">Visualizing <code>in_axes</code> vs <code>out_axes</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>in_axes</code></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">"Slice this input along the 0-th dimension. Pass one slice at a time."</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>in_axes</code></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;">"Slice along the 1st dimension (e.g., columns)."</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>in_axes</code></td>
+<td style="text-align: left;"><code>None</code></td>
+<td style="text-align: left;">"Don't slice. Pass this entire object to every instance."</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>out_axes</code></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">"Stack the results along the 0-th dimension."</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-randomness-the-key-pattern">4. Randomness (The "Key" Pattern)</h2>
+<p>JAX PRNG (Pseudo-Random Number Generation) is explicit. There is no global seed.</p>
+<p><strong>The Pattern:</strong> Always Split, Then Use.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jr</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">key</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="c1"># 1. SPLIT the key into as many as you need, plus one for the next step.</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">step_key</span><span class="p">,</span> <span class="n">noise_key</span><span class="p">,</span> <span class="n">sub_key</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="c1"># 2. USE the sub-keys</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">noise</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">noise_key</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="c1"># 3. RETURN the &#39;step_key&#39; for the next iteration</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="n">step_key</span>
+</span></code></pre></div>
+<p><strong>Common Pitfall:</strong> Reusing the same key results in identical "random" numbers.</p>
+<hr />
+<h2 id="5-control-flow-scan-and-cond">5. Control Flow: <code>scan</code> and <code>cond</code></h2>
+<h3 id="loops-scan-vs-python-loops">Loops: <code>scan</code> vs Python Loops</h3>
+<p>If you write a Python <code>for</code> loop, JAX unrolls it during compilation.</p>
+<ul>
+<li><strong>Short loop (10 steps):</strong> Fine. Fast.</li>
+<li><strong>Long loop (10,000 steps):</strong> Compile time explosion. Huge binary.</li>
+</ul>
+<p>Use <code>jax.lax.scan</code> for long loops. It compiles into a single "loop" instruction in XLA.</p>
+<p><strong>Template for <code>scan</code> (The "Carry" Pattern):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">one_step</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="c1"># &#39;carry&#39; is your State</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="c1"># &#39;x&#39; is input for this specific time step (optional)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">new_state</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">carry</span><span class="p">)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">output</span> <span class="o">=</span> <span class="n">compute_metric</span><span class="p">(</span><span class="n">new_state</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">return</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">output</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># Run for 1000 steps</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">final_state</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">one_step</span><span class="p">,</span> <span class="n">init_state</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="conditionals-cond-vs-python-if">Conditionals: <code>cond</code> vs Python <code>if</code></h3>
+<ul>
+<li><strong>Python <code>if</code>:</strong> Evaluated at <em>trace time</em>. The condition must be known before JAX sees any data (e.g., a hyperparameter flag).</li>
+<li><strong><code>jax.lax.cond</code>:</strong> Evaluated at <em>runtime</em> (on the GPU/TPU). Both branches are traced.</li>
+</ul>
+<p><strong>Template for <code>cond</code>:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># jax.lax.cond(pred, true_fun, false_fun, *operands)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">do_reset</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="n">State</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">keep_going</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="n">state</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># If &#39;done&#39; is true (at runtime), call do_reset(state), else keep_going(state)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">next_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">done</span><span class="p">,</span> <span class="n">do_reset</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</span></code></pre></div>
+<p><em>Note: Both branches must return PyTrees with the exact same structure and dtype.</em></p>
+<hr />
+<h2 id="6-jit-compilation-jaxjit">6. JIT Compilation (<code>@jax.jit</code>)</h2>
+<p>JIT compiles your Python function into optimized machine code (XLA).</p>
+<ul>
+<li><strong>Static Arguments:</strong> If a function argument changes the <em>shape</em> of arrays or the <em>structure</em> of the graph (e.g., a boolean flag for "is_training"), it must be marked static.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nd">@partial</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;is_training&quot;</span><span class="p">,))</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">is_training</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">if</span> <span class="n">is_training</span><span class="p">:</span>  <span class="c1"># This Python &#39;if&#39; runs once during tracing</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="k">return</span> <span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">return</span> <span class="n">x</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Don't JIT everything:</strong> Usually, you only JIT the top-level update step. JIT-ing tiny functions inside a loop is useless (and often harmful if the loop itself isn't JIT-ed).</li>
+</ul>
+<hr />
+<h2 id="7-cheatsheet-common-dimension-operations">7. Cheatsheet: Common Dimension Operations</h2>
+<p>Assume <code>x.shape = (B, H, W, C)</code> (Batch, Height, Width, Channel).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operation</th>
+<th style="text-align: left;">Code</th>
+<th style="text-align: left;">Result Shape</th>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Add Dim</strong></td>
+<td style="text-align: left;"><code>x[None, ...]</code></td>
+<td style="text-align: left;"><code>(1, B, H, W, C)</code></td>
+<td style="text-align: left;">Prepend dim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Add Dim</strong></td>
+<td style="text-align: left;"><code>x[..., None]</code></td>
+<td style="text-align: left;"><code>(B, H, W, C, 1)</code></td>
+<td style="text-align: left;">Append dim</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Flatten</strong></td>
+<td style="text-align: left;"><code>x.reshape(B, -1)</code></td>
+<td style="text-align: left;"><code>(B, H*W*C)</code></td>
+<td style="text-align: left;">Flatten all but batch</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Transpose</strong></td>
+<td style="text-align: left;"><code>jnp.transpose(x, (0, 3, 1, 2))</code></td>
+<td style="text-align: left;"><code>(B, C, H, W)</code></td>
+<td style="text-align: left;">NHWC -&gt; NCHW</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Einsum</strong></td>
+<td style="text-align: left;"><code>jnp.einsum('bij,bjk-&gt;bik', A, B)</code></td>
+<td style="text-align: left;"><code>(B, I, K)</code></td>
+<td style="text-align: left;">Batch MatMul</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-debugging-jax">8. Debugging JAX</h2>
+<p>Since you can't just <code>print()</code> inside a JIT-ed function (it only prints once during tracing), use:</p>
+<ol>
+<li><strong><code>jax.debug.print</code></strong>:
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;x shape: </span><span class="si">{x}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></code></pre></div></li>
+<li><strong><code>jax.disable_jit()</code></strong>:
+    Temporarily turns off JIT so you can use standard Python debuggers (<code>pdb</code>).
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">disable_jit</span><span class="p">():</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></code></pre></div></li>
+</ol>
+<hr />
+<h2 id="9-useful-apis-cheatsheet">9. Useful APIs / Cheatsheet</h2>
+<h3 id="creation-initialization">Creation &amp; Initialization</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>jnp.zeros</code>, <code>jnp.ones</code></td>
+<td style="text-align: left;">Create arrays of 0s or 1s</td>
+<td style="text-align: left;"><code>jnp.zeros((2, 3))</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.full</code></td>
+<td style="text-align: left;">Create array with constant value</td>
+<td style="text-align: left;"><code>jnp.full((2,), 3.14)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.eye</code></td>
+<td style="text-align: left;">Identity matrix</td>
+<td style="text-align: left;"><code>jnp.eye(3)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.arange</code></td>
+<td style="text-align: left;">Range of numbers</td>
+<td style="text-align: left;"><code>jnp.arange(0, 10, 2)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.linspace</code></td>
+<td style="text-align: left;">Evenly spaced numbers</td>
+<td style="text-align: left;"><code>jnp.linspace(0, 1, 11)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jr.normal</code></td>
+<td style="text-align: left;">Random normal (Gaussian)</td>
+<td style="text-align: left;"><code>jr.normal(key, (2, 2))</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jr.uniform</code></td>
+<td style="text-align: left;">Random uniform [0, 1)</td>
+<td style="text-align: left;"><code>jr.uniform(key, (5,))</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jr.randint</code></td>
+<td style="text-align: left;">Random integers</td>
+<td style="text-align: left;"><code>jr.randint(key, (5,), 0, 10)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="array-manipulation">Array Manipulation</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>jnp.stack</code></td>
+<td style="text-align: left;">Join arrays along new axis</td>
+<td style="text-align: left;"><code>jnp.stack([x, y])</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.concatenate</code></td>
+<td style="text-align: left;">Join along existing axis</td>
+<td style="text-align: left;"><code>jnp.concatenate([x, y], axis=0)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.where</code></td>
+<td style="text-align: left;">Conditional selection</td>
+<td style="text-align: left;"><code>jnp.where(x &gt; 0, x, 0)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.squeeze</code></td>
+<td style="text-align: left;">Remove dims of size 1</td>
+<td style="text-align: left;"><code>x.squeeze()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.expand_dims</code></td>
+<td style="text-align: left;">Add dim of size 1</td>
+<td style="text-align: left;"><code>jnp.expand_dims(x, axis=0)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.ravel</code></td>
+<td style="text-align: left;">Flatten to 1D</td>
+<td style="text-align: left;"><code>x.ravel()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="math-logic">Math &amp; Logic</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>jnp.dot</code> / <code>@</code></td>
+<td style="text-align: left;">Matrix multiplication</td>
+<td style="text-align: left;"><code>A @ B</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.sum</code>, <code>jnp.mean</code></td>
+<td style="text-align: left;">Sum/Mean (supports axis)</td>
+<td style="text-align: left;"><code>x.mean(axis=-1)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.max</code>, <code>jnp.argmax</code></td>
+<td style="text-align: left;">Max value / Index of max</td>
+<td style="text-align: left;"><code>x.argmax()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.clip</code></td>
+<td style="text-align: left;">Clip values to range</td>
+<td style="text-align: left;"><code>jnp.clip(x, 0, 1)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jnp.allclose</code></td>
+<td style="text-align: left;">Check if arrays are close</td>
+<td style="text-align: left;"><code>jnp.allclose(x, y)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.nn.softmax</code></td>
+<td style="text-align: left;">Softmax function</td>
+<td style="text-align: left;"><code>jax.nn.softmax(logits)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.nn.relu</code></td>
+<td style="text-align: left;">ReLU activation</td>
+<td style="text-align: left;"><code>jax.nn.relu(x)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functional-transformations">Functional Transformations</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>jax.jit</code></td>
+<td style="text-align: left;">Just-In-Time compilation (speed).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.grad</code></td>
+<td style="text-align: left;">Computes gradient (single scalar output).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.value_and_grad</code></td>
+<td style="text-align: left;">Returns <code>(value, gradient)</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.vmap</code></td>
+<td style="text-align: left;">Vectorizes a function (adds batch dim).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.lax.scan</code></td>
+<td style="text-align: left;">Efficient loop with carry.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>jax.lax.cond</code></td>
+<td style="text-align: left;">Efficient conditional branching.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-einops-tensor-magic">10. Einops (Tensor Magic)</h2>
+<p>Einops is not built-in, but it is the <em>idiomatic</em> way to handle tensor reshaping in JAX research code. It is clearer and safer than <code>reshape</code>/<code>transpose</code>.</p>
+<p><strong>APIs:</strong> <code>rearrange</code>, <code>reduce</code>, <code>repeat</code></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">einops</span><span class="w"> </span><span class="kn">import</span> <span class="n">rearrange</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">repeat</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># Assume images: (Batch, Height, Width, Channel)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></code></pre></div>
+<h3 id="1-rearrange-permute-flatten-split">1. Rearrange (Permute, Flatten, Split)</h3>
+<p>Replaces <code>transpose</code>, <code>reshape</code>, and <code>squeeze</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># HWC to CHW (PyTorch style)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">x_chw</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b h w c -&gt; b c h w&#39;</span><span class="p">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Flatten images to vectors</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">x_flat</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b h w c -&gt; b (h w c)&#39;</span><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># Shape: (32, 12288)</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="c1"># Split heads (for Attention)</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># Assume x is (Batch, SeqLen, Dim) -&gt; (Batch, SeqLen, Heads, HeadDim)</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">q</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="s1">&#39;b s (h d) -&gt; b s h d&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="2-reduce-pool-mean-max">2. Reduce (Pool, Mean, Max)</h3>
+<p>Replaces <code>mean</code>, <code>sum</code>, <code>max</code> with explicit axes.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Global Average Pooling (spatial mean)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># &quot;Reduce over h and w, keep b and c&quot;</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b h w c -&gt; b c&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Shape: (32, 3)</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># Max over channels</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="n">y</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b h w c -&gt; b h w&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="3-repeat-broadcast">3. Repeat (Broadcast)</h3>
+<p>Replaces <code>tile</code> or <code>expand_dims</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Repeat a class token (1, D) for every item in batch</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">cls_token</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">512</span><span class="p">))</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">cls_tokens</span> <span class="o">=</span> <span class="n">repeat</span><span class="p">(</span><span class="n">cls_token</span><span class="p">,</span> <span class="s1">&#39;1 d -&gt; b d&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Shape: (32, 512)</span>
+</span></code></pre></div>
+<hr />
+<h2 id="11-pytrees-jax-tree-functions">11. PyTrees &amp; JAX Tree Functions</h2>
+<p>A <strong>PyTree</strong> is a container of leaf elements and/or more PyTrees. Containers include lists, tuples, dicts, <code>None</code>, and custom classes registered with JAX. Leaves are typically JAX arrays, but can be anything JAX treats as an opaque value.</p>
+<h3 id="key-concepts">Key Concepts</h3>
+<ul>
+<li><strong>Leaf:</strong> An element in a PyTree that is not a PyTree itself (usually a JAX array or scalar).</li>
+<li><strong>Structure (Treedef):</strong> The shape/container-type of the PyTree, disregarding the actual leaf values.</li>
+</ul>
+<h3 id="common-jaxtree-functions-with-examples">Common <code>jax.tree</code> Functions with Examples</h3>
+<p>JAX provides powerful utilities for working with PyTrees under <code>jax.tree</code> (formerly <code>jax.tree_util</code>).</p>
+<h4 id="1-jaxtreemap-mapping-over-leaves">1. <code>jax.tree.map</code> (Mapping over leaves)</h4>
+<p>Applies a function to every leaf in the PyTree, preserving the structure.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))}</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="c1"># Double every element in the tree</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">doubled_tree</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="c1"># Result: {&#39;a&#39;: Array([2, 4]), &#39;b&#39;: (Array([6]), Array([8, 10]))}</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="c1"># Add two trees of the exact same structure</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="n">tree2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]))}</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="n">sum_tree</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">tree2</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="2-jaxtreeleaves-extracting-leaves">2. <code>jax.tree.leaves</code> (Extracting leaves)</h4>
+<p>Extracts all leaves from a PyTree into a flat list. Useful for operations like computing a global metric across all parameters.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">])}</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">leaves</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># leaves: [Array([1., 2.]), Array([3.])]</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># Compute the L2 norm of all parameters in a model</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">global_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">(</span><span class="n">tree</span><span class="p">)))</span>
+</span></code></pre></div>
+<h4 id="3-jaxtreereduce-reducing-leaves">3. <code>jax.tree.reduce</code> (Reducing leaves)</h4>
+<p>Reduces all leaves to a single value.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])}</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1"># Sum of all elements across all arrays</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">total_sum</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">tree</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="4-jaxtreeflatten-and-jaxtreeunflatten">4. <code>jax.tree.flatten</code> and <code>jax.tree.unflatten</code></h4>
+<p>Useful when you need to interface with APIs that only accept flat lists of arrays (e.g., <code>scipy.optimize</code>).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="c1"># Flatten</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">flat_leaves</span><span class="p">,</span> <span class="n">treedef</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="c1"># ... do some flat operations ...</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="n">new_flat_leaves</span> <span class="o">=</span> <span class="p">[</span><span class="n">leaf</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="n">flat_leaves</span><span class="p">]</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="c1"># Unflatten back to the original structure</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="n">new_tree</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="n">treedef</span><span class="p">,</span> <span class="n">new_flat_leaves</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="custom-pytrees">Custom PyTrees</h3>
+<p>If you don't use <code>equinox.Module</code> or <code>flax.struct.dataclass</code>, you must register your custom classes with JAX so it knows how to flatten and unflatten them. Otherwise, JAX treats the object itself as a single opaque leaf.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">jax.tree_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_pytree_node_class</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nd">@register_pytree_node_class</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyTree</span><span class="p">:</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>  <span class="c1"># Leaf</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>  <span class="c1"># Leaf</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">tree_flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>        <span class="c1"># Return a tuple of (children, auxiliary_data)</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>        <span class="n">children</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>        <span class="n">aux_data</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">aux_data</span><span class="p">)</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">tree_unflatten</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aux_data</span><span class="p">,</span> <span class="n">children</span><span class="p">):</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>        <span class="c1"># Reconstruct the object</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="c1"># Now jax.tree.map will go inside MyTree to modify &#39;a&#39; and &#39;b&#39;</span>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="n">obj</span> <span class="o">=</span> <span class="n">MyTree</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">]))</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a><span class="n">new_obj</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h2 id="12-equinox-tree-operations">12. Equinox Tree Operations</h2>
+<p>Equinox provides additional PyTree utilities that are essential for deep learning, specifically for managing state and model parameters.</p>
+<h3 id="1-eqxtree_at-functional-update">1. <code>eqx.tree_at</code> (Functional Update)</h3>
+<p>The most common way to "mutate" an immutable PyTree. JAX arrays and Equinox modules are immutable; <code>tree_at</code> returns a new copy with the specified leaf modified.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">equinox</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">eqx</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1"># Replace a leaf</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># Syntax: eqx.tree_at(where_fn, pytree, replace_with)</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">new_state</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">new_weights</span><span class="p">)</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1"># Apply a function to a leaf</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="n">new_state</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="2-eqxpartition-and-eqxcombine">2. <code>eqx.partition</code> and <code>eqx.combine</code></h3>
+<p>Used to separate a PyTree into parts based on a filter function. This is critical for functions like <code>jax.jit</code> or <code>jax.grad</code> which require all inputs to be JAX arrays (unless marked as static).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Partition into JAX-compatible arrays and &quot;static&quot; metadata (strings, bools, etc.)</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">arrays</span><span class="p">,</span> <span class="n">static</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">eqx</span><span class="o">.</span><span class="n">is_array</span><span class="p">)</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># Now &#39;arrays&#39; can be safely passed into JAX transformations</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1"># &#39;static&#39; is usually handled by closures or marked as static in JIT</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># Reconstruct the original model structure</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="n">model</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">static</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="3-eqxtree_serialise_leaves-and-eqxtree_deserialise_leaves">3. <code>eqx.tree_serialise_leaves</code> and <code>eqx.tree_deserialise_leaves</code></h3>
+<p>The standard way to save and load Equinox models. It uses <code>safetensors</code> under the hood if available, or <code>numpy</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Save model to disk</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">eqx</span><span class="o">.</span><span class="n">tree_serialise_leaves</span><span class="p">(</span><span class="s2">&quot;model.eqx&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># Load from disk</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="c1"># Requires a &#39;template&#39; model that has the exact same structure as the saved one.</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="n">model</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_deserialise_leaves</span><span class="p">(</span><span class="s2">&quot;model.eqx&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="4-filtering-utilities">4. Filtering Utilities</h3>
+<p>Equinox provides predicates to help with partitioning and mapping.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Predicate</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>eqx.is_array</code></td>
+<td style="text-align: left;">Matches any JAX array or scalar.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>eqx.is_inexact_array</code></td>
+<td style="text-align: left;">Matches floating point JAX arrays (useful for trainable params).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>eqx.is_array_like</code></td>
+<td style="text-align: left;">Matches arrays or things that can be converted to arrays.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
