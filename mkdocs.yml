@@ -28,7 +28,5 @@ nav:
   - Overview: index.md
   - Modules:
     - Tracking: tracking.md
-    - Design: design.md
   - Examples: examples.md
   - API Reference: api.md
-  - JAX Reference: jax.md
