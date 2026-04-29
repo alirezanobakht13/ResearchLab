@@ -204,25 +204,6 @@
   
 
       
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="jax/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  JAX Reference
-
-      </a>
-    </li>
-  
-
-      
     </ul>
   </div>
 </nav>
@@ -335,21 +316,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-tracking-module-researchlabtracking" class="md-nav__link">
+  <a href="#tracking-module-researchlabtracking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Tracking Module (researchlab.tracking)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-design-module-researchlabdesign" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Design Module (researchlab.design)
+        Tracking Module (researchlab.tracking)
       
     </span>
   </a>
@@ -460,34 +430,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="design/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Design
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -549,33 +491,6 @@
   
 
     
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="jax/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    JAX Reference
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -615,21 +530,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-tracking-module-researchlabtracking" class="md-nav__link">
+  <a href="#tracking-module-researchlabtracking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Tracking Module (researchlab.tracking)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-design-module-researchlabdesign" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Design Module (researchlab.design)
+        Tracking Module (researchlab.tracking)
       
     </span>
   </a>
@@ -670,31 +574,20 @@
 
 
 <h1 id="welcome-to-research-lab">Welcome to Research Lab</h1>
-<p><strong>Research Lab (rlab)</strong> is a toolkit designed to make machine learning research reproducible, structured, and manageable.</p>
-<p>It addresses two fundamental challenges:
-1.  <strong>Reproducibility of "Dirty" Runs:</strong> Research often involves quick iteration where code is run before being committed. <code>rlab</code> automatically captures the exact state (Git SHA + uncommitted patch) of every experiment.
-2.  <strong>Structured Research Code:</strong> <code>rlab</code> provides a set of functional abstractions (State, Config, Loop) powered by JAX and Equinox to write clean, testable, and modular training loops.</p>
+<p><strong>Research Lab (rlab)</strong> makes ML experiments reproducible by tracking exact Git state per run.</p>
+<p>It addresses one core challenge:
+1. <strong>Reproducibility of "Dirty" Runs:</strong> experiments often run before commit. <code>rlab</code> captures exact state
+   (Git SHA + uncommitted patch) for each run.</p>
 <h2 id="key-features">Key Features</h2>
-<h3 id="1-tracking-module-researchlabtracking">1. Tracking Module (<code>researchlab.tracking</code>)</h3>
+<h3 id="tracking-module-researchlabtracking">Tracking Module (<code>researchlab.tracking</code>)</h3>
 <ul>
-<li><strong>Context Manager:</strong> <code>ExperimentTracker</code> automatically logs Git state to MLflow.</li>
+<li><strong>Context Manager:</strong> <code>ExperimentTracker</code> logs Git state to MLflow.</li>
 <li><strong>CLI:</strong> <code>rlab restore</code> and <code>rlab diff</code> to manage and inspect experiment code.</li>
-<li><strong>Dirty State:</strong> Captures staged, unstaged, and untracked files.</li>
-</ul>
-<h3 id="2-design-module-researchlabdesign">2. Design Module (<code>researchlab.design</code>)</h3>
-<ul>
-<li><strong>State:</strong> JAX PyTree-based state management.</li>
-<li><strong>Config:</strong> Immutable, validated configuration using Pydantic.</li>
-<li><strong>Selectors:</strong> Decouple your math (kernels) from your data structure.</li>
-<li><strong>Loop:</strong> A robust, reusable orchestrator for training and evaluation.</li>
+<li><strong>Dirty State:</strong> captures staged, unstaged, and untracked files.</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<p>Install the core package (tracking only):
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>add<span class="w"> </span>researchlab
-</span></code></pre></div></p>
-<p>Install with design features (JAX/Equinox support):
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>add<span class="w"> </span>researchlab<span class="o">[</span>design<span class="o">]</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 
 
 
